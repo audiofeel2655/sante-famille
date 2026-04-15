@@ -4,38 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Santé Famille">
-<meta name="theme-color" content="#0f1117">
-<title>Santé Famille</title>
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f1117'/><text y='.9em' font-size='72' x='14'>🏥</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Famille Z">
+<meta name="theme-color" content="#ffffff">
+<title>Suivi remboursements Famille Z</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231a5c3a'/><text y='.9em' font-size='62' x='18'>💊</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f1117;
-  --card: #13161f;
-  --border: #1e2230;
-  --input: #1a1d26;
-  --text: #f0ede6;
-  --soft: #6b7499;
-  --green: #3de09a;
-  --green-bg: #0e2e1e;
-  --green-dark: #1e6b4a;
-  --purple: #b47de0;
-  --purple-bg: #1a1428;
-  --red: #e07a5f;
-  --red-bg: #1f1210;
-  --yellow: #e8b44a;
-  --yellow-bg: #2e2408;
-  --blue: #8899cc;
-  --blue-bg: #1a1d2e;
+  --bg: #f7f8fa;
+  --white: #ffffff;
+  --border: #e8ecf0;
+  --border2: #d0d8e0;
+  --text: #0e1f2e;
+  --soft: #7a8a9a;
+  --soft2: #b0bcc8;
+  --green: #1a5c3a;
+  --green-mid: #2d8a58;
+  --green-light: #e8f5ee;
+  --green-acc: #3db870;
+  --navy: #0e2a45;
+  --gold: #c9a84c;
+  --gold-light: #fdf6e3;
+  --red: #d94040;
+  --red-light: #fdf0f0;
+  --orange: #e07a2f;
+  --orange-light: #fef4ec;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bot: env(safe-area-inset-bottom, 0px);
+  --radius: 14px;
+  --shadow: 0 2px 12px rgba(14,31,46,.07);
+  --shadow-md: 0 4px 24px rgba(14,31,46,.10);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; overflow: hidden; }
 body {
-  font-family: 'Sora', -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
   display: flex;
@@ -44,154 +48,242 @@ body {
 
 /* ── HEADER ── */
 .header {
-  background: linear-gradient(135deg, #0d1f16, #0f1117);
+  background: var(--white);
   border-bottom: 1px solid var(--border);
-  padding: calc(var(--safe-top) + 16px) 18px 14px;
+  padding: calc(var(--safe-top) + 18px) 18px 16px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+}
+.header-top {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 14px;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+}
+.brand-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--green), var(--green-mid));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; box-shadow: 0 2px 10px rgba(26,92,58,.25);
   flex-shrink: 0;
 }
-.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.header-title { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-.header-title em { color: var(--green); font-style: italic; font-weight: 400; }
+.brand-text {}
+.brand-title {
+  font-size: 0.95rem; font-weight: 800; color: var(--navy);
+  line-height: 1.1; letter-spacing: -.01em;
+}
+.brand-sub {
+  font-size: 0.65rem; color: var(--soft); font-weight: 500;
+  text-transform: uppercase; letter-spacing: .06em; margin-top: 1px;
+}
 .sync-badge {
   display: flex; align-items: center; gap: 5px;
-  font-size: 0.7rem; color: var(--soft);
-  background: var(--card); border: 1px solid var(--border);
-  padding: 4px 10px; border-radius: 20px;
+  font-size: 0.68rem; color: var(--soft);
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 5px 10px; border-radius: 20px; font-weight: 500;
 }
 .sync-dot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--green); flex-shrink: 0;
+  background: var(--green-acc); flex-shrink: 0;
 }
-.sync-dot.loading { background: var(--yellow); animation: pulse 1.2s infinite; }
+.sync-dot.loading { background: var(--gold); animation: pulse 1.2s infinite; }
 .sync-dot.error { background: var(--red); }
 
 /* STATS */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .stat {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; padding: 8px 10px; text-align: center;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 10px; text-align: center;
 }
-.stat-val { font-size: 0.9rem; font-weight: 700; }
-.stat-lbl { font-size: 0.58rem; color: var(--soft); text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+.stat-val { font-size: 0.88rem; font-weight: 800; }
+.stat-lbl { font-size: 0.58rem; color: var(--soft); text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; font-weight: 600; }
 
 /* ── TABS ── */
 .tabs {
-  display: flex; gap: 0;
-  background: var(--card); border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
+  display: flex; background: var(--white);
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
 }
 .tab {
   flex: 1; padding: 13px 6px; text-align: center;
-  font-size: 0.75rem; font-weight: 600; color: var(--soft);
+  font-size: 0.77rem; font-weight: 700; color: var(--soft);
   border: none; background: none; font-family: inherit;
-  border-bottom: 2px solid transparent; cursor: pointer;
-  transition: color .2s, border-color .2s;
+  border-bottom: 2.5px solid transparent; cursor: pointer;
+  transition: color .2s, border-color .2s; letter-spacing: .01em;
 }
 .tab.active { color: var(--green); border-bottom-color: var(--green); }
 
-/* ── SCROLL AREA ── */
+/* ── SCROLL ── */
 .scroll-area {
   flex: 1; overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 14px 14px calc(var(--safe-bot) + 14px);
+  padding: 16px 14px calc(var(--safe-bot) + 16px);
 }
 .scroll-area::-webkit-scrollbar { display: none; }
 
 /* ── FORM ── */
-.form-section { display: flex; flex-direction: column; gap: 11px; }
+.form-section { display: flex; flex-direction: column; gap: 12px; }
 .field { display: flex; flex-direction: column; gap: 5px; }
-.field label { font-size: 0.68rem; font-weight: 600; color: var(--soft); text-transform: uppercase; letter-spacing: .05em; }
+.field label {
+  font-size: 0.68rem; font-weight: 700; color: var(--soft);
+  text-transform: uppercase; letter-spacing: .06em;
+}
 .field input, .field select {
   padding: 12px 14px;
-  background: var(--input); border: 1.5px solid var(--border);
+  background: var(--white); border: 1.5px solid var(--border2);
   border-radius: 11px; color: var(--text);
-  font-family: inherit; font-size: 0.9rem;
+  font-family: inherit; font-size: 0.9rem; font-weight: 500;
   -webkit-appearance: none; appearance: none;
-  transition: border-color .2s;
+  transition: border-color .2s, box-shadow .2s;
+  box-shadow: 0 1px 4px rgba(14,31,46,.04);
 }
-.field input:focus, .field select:focus { outline: none; border-color: var(--green-dark); }
-.field input::placeholder { color: #3a3e52; }
+.field input:focus, .field select:focus {
+  outline: none; border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(45,138,88,.12);
+}
+.field input::placeholder { color: var(--soft2); }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* RADIO GROUP */
+.radio-group {
+  background: var(--white); border: 1.5px solid var(--border2);
+  border-radius: 11px; padding: 13px 14px;
+  box-shadow: 0 1px 4px rgba(14,31,46,.04);
+}
+.radio-group-label {
+  font-size: 0.68rem; font-weight: 700; color: var(--soft);
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px;
+  display: block;
+}
+.radio-options { display: flex; gap: 10px; }
+.radio-opt {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  gap: 7px; padding: 9px 12px; border-radius: 9px;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-size: 0.82rem; font-weight: 600; color: var(--soft);
+  transition: all .18s; user-select: none;
+}
+.radio-opt input[type="radio"] { display: none; }
+.radio-opt.selected-oui {
+  background: var(--green-light); border-color: var(--green-mid);
+  color: var(--green);
+}
+.radio-opt.selected-non {
+  background: var(--red-light); border-color: #e8a0a0;
+  color: var(--red);
+}
+
 .btn-submit {
   width: 100%; padding: 15px;
-  background: linear-gradient(135deg, #1e6b4a, #2d9e6e);
+  background: linear-gradient(135deg, var(--green), var(--green-mid));
   color: #fff; border: none; border-radius: 13px;
-  font-family: inherit; font-size: 0.95rem; font-weight: 700;
-  cursor: pointer; letter-spacing: .02em;
-  box-shadow: 0 4px 20px #1e6b4a55;
+  font-family: inherit; font-size: 0.95rem; font-weight: 800;
+  cursor: pointer; letter-spacing: .01em;
+  box-shadow: 0 4px 18px rgba(26,92,58,.3);
   margin-top: 4px;
   transition: opacity .2s, transform .1s;
   -webkit-appearance: none;
 }
-.btn-submit:active { transform: scale(.97); opacity: .85; }
+.btn-submit:active { transform: scale(.97); opacity: .88; }
 .btn-submit:disabled { opacity: .5; }
 
 /* ── FILTERS ── */
 .filter-bar {
   display: flex; gap: 6px; flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 12px; align-items: center;
 }
 .flt {
-  padding: 6px 13px; border-radius: 20px;
-  border: 1.5px solid var(--border); background: transparent;
-  color: var(--soft); font-family: inherit; font-size: 0.75rem;
-  font-weight: 500; cursor: pointer;
+  padding: 6px 12px; border-radius: 20px;
+  border: 1.5px solid var(--border2); background: var(--white);
+  color: var(--soft); font-family: inherit; font-size: 0.73rem;
+  font-weight: 600; cursor: pointer;
   transition: all .18s; -webkit-appearance: none;
+  box-shadow: 0 1px 3px rgba(14,31,46,.05);
 }
-.flt.on { background: var(--green-bg); border-color: var(--green-dark); color: var(--green); }
-.flt-sep { width: 1px; height: 24px; background: var(--border); align-self: center; }
+.flt.on {
+  background: var(--green-light); border-color: var(--green-mid);
+  color: var(--green);
+}
+.flt-sep { width: 1px; height: 22px; background: var(--border); align-self: center; }
 
 /* ── ENTRY CARDS ── */
 .entries { display: flex; flex-direction: column; gap: 9px; }
 .entry {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 13px; padding: 13px 14px;
-  display: grid; grid-template-columns: 36px 1fr auto;
-  gap: 11px; align-items: center;
-  animation: slideIn .25s ease;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 13px 14px;
+  box-shadow: var(--shadow);
+  animation: slideIn .22s ease;
 }
-@keyframes slideIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 
+.entry-top {
+  display: grid; grid-template-columns: 36px 1fr auto;
+  gap: 10px; align-items: flex-start;
+}
 .avatar {
   width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; flex-shrink: 0;
+  font-size: 0.75rem; font-weight: 800; flex-shrink: 0;
+  letter-spacing: -.01em;
 }
-.av-moi   { background: #1a3d2a; box-shadow: 0 2px 8px #1e6b4a44; }
-.av-femme { background: #2a1a3d; box-shadow: 0 2px 8px #7c3d8f44; }
-.av-fils  { background: #1a2a3d; box-shadow: 0 2px 8px #1e5fa844; }
+.av-gabriel { background: #e8f5ee; color: var(--green); border: 1.5px solid #b8dfc8; }
+.av-lisa    { background: #f3eef8; color: #6b3fa0; border: 1.5px solid #d4bef0; }
+.av-levi    { background: #eef4fc; color: #1e5fa8; border: 1.5px solid #bcd4f0; }
 
-.entry-type { font-weight: 600; font-size: 0.88rem; margin-bottom: 3px; }
-.entry-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 5px; }
-.entry-date { font-size: 0.7rem; color: var(--soft); background: var(--input); padding: 2px 7px; border-radius: 5px; }
+.entry-main {}
+.entry-type { font-weight: 700; font-size: 0.88rem; color: var(--navy); margin-bottom: 3px; }
+.entry-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.entry-date {
+  font-size: 0.68rem; color: var(--soft); background: var(--bg);
+  padding: 2px 7px; border-radius: 5px; font-weight: 600;
+}
 .entry-note { font-size: 0.7rem; color: var(--soft); font-style: italic; }
-.pills { display: flex; gap: 5px; flex-wrap: wrap; }
-.pill {
-  font-size: 0.68rem; font-weight: 600;
-  padding: 2px 8px; border-radius: 20px;
-  display: flex; align-items: center; gap: 4px;
-}
-.pill-dot { width: 5px; height: 5px; border-radius: 50%; }
 
-.entry-right { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
-.status-btn {
-  font-size: 0.65rem; font-weight: 700; padding: 5px 9px;
-  border-radius: 20px; border: 1.5px solid; cursor: pointer;
-  font-family: inherit; text-transform: uppercase; letter-spacing: .04em;
-  white-space: nowrap; transition: opacity .15s;
-  -webkit-appearance: none;
+.entry-amount {
+  font-size: 1rem; font-weight: 800; color: var(--navy);
+  white-space: nowrap;
 }
-.status-btn:active { opacity: .7; }
-.s-attente { background: var(--yellow-bg); color: var(--yellow); border-color: #4a3a10; }
-.s-ss_ok   { background: var(--green-bg);  color: var(--green);  border-color: #1a4a30; }
-.s-tout_ok { background: #1a3d2e;          color: #3de09a;       border-color: #2a6048; }
+
+/* STATUS ROW */
+.entry-footer {
+  display: flex; align-items: center; gap: 7px;
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.badge {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 20px;
+  font-size: 0.68rem; font-weight: 700;
+  border: 1.5px solid; cursor: pointer;
+  transition: opacity .15s, transform .1s;
+  font-family: inherit; -webkit-appearance: none;
+  letter-spacing: .02em;
+}
+.badge:active { opacity: .7; transform: scale(.96); }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+/* Carte vitale */
+.cv-oui  { background: var(--green-light); color: var(--green);   border-color: #b8dfc8; }
+.cv-non  { background: var(--red-light);   color: var(--red);     border-color: #f0b8b8; }
+/* Mutuelle */
+.mut-oui { background: #f0eafa; color: #6b3fa0; border-color: #d4bef0; }
+.mut-non { background: var(--orange-light); color: var(--orange); border-color: #f5c8a0; }
+
 .btn-del {
-  background: none; border: none; color: #2a2e3f;
-  font-size: 0.85rem; cursor: pointer; padding: 2px 4px;
-  border-radius: 5px; transition: color .2s;
-  -webkit-appearance: none;
+  margin-left: auto; background: none; border: none;
+  color: var(--soft2); font-size: 0.85rem; cursor: pointer;
+  padding: 3px 5px; border-radius: 5px;
+  transition: color .2s; -webkit-appearance: none;
 }
 .btn-del:active { color: var(--red); }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 0.65rem; font-weight: 800; color: var(--soft);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 10px; margin-top: 4px;
+}
 
 /* ── EMPTY ── */
 .empty { text-align: center; padding: 50px 20px; color: var(--soft); }
@@ -200,65 +292,79 @@ body {
 
 /* ── TOAST ── */
 .toast {
-  position: fixed; bottom: calc(var(--safe-bot) + 20px);
+  position: fixed; bottom: calc(var(--safe-bot) + 22px);
   left: 50%; transform: translateX(-50%);
   padding: 11px 22px; border-radius: 13px;
-  font-size: 0.85rem; font-weight: 500;
+  font-size: 0.83rem; font-weight: 600;
   z-index: 9999; white-space: nowrap;
   animation: toastIn .3s ease;
-  box-shadow: 0 8px 30px rgba(0,0,0,.5);
+  box-shadow: var(--shadow-md);
   pointer-events: none;
 }
-@keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(12px) scale(.95); } to { opacity:1; transform:translateX(-50%) translateY(0) scale(1); } }
-.toast-ok   { background: #0e2e1e; border:1px solid #2a6048; color: var(--green); }
-.toast-err  { background: #2e1010; border:1px solid #7a2020; color: #f08080; }
-.toast-warn { background: var(--yellow-bg); border:1px solid #5a4010; color: var(--yellow); }
+@keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(10px) scale(.95); } to { opacity:1; transform:translateX(-50%) translateY(0) scale(1); } }
+.toast-ok   { background: var(--green-light); border:1px solid #b8dfc8; color: var(--green); }
+.toast-err  { background: var(--red-light);   border:1px solid #f0b8b8; color: var(--red); }
+.toast-warn { background: var(--gold-light);  border:1px solid #e0d0a0; color: #8a6820; }
 
-/* ── FOOTER NOTE ── */
+/* ── FOOTER ── */
 .footer-note {
-  margin-top: 16px; padding: 11px 14px;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; font-size: 0.7rem; color: var(--soft);
-  display: flex; flex-direction: column; gap: 4px; line-height: 1.6;
+  margin-top: 14px; padding: 11px 14px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 10px; font-size: 0.68rem; color: var(--soft);
+  line-height: 1.7; font-weight: 500;
 }
 
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
 </style>
 </head>
 <body>
 
-<!-- TOAST -->
 <div class="toast" id="toast" style="display:none"></div>
 
 <!-- HEADER -->
 <div class="header">
   <div class="header-top">
-    <div class="header-title">🏥 Santé <em>Famille</em></div>
+    <div class="brand">
+      <div class="brand-icon">💊</div>
+      <div class="brand-text">
+        <div class="brand-title">Suivi remboursements</div>
+        <div class="brand-sub">Famille Z · UNIM</div>
+      </div>
+    </div>
     <div class="sync-badge">
       <div class="sync-dot" id="sync-dot"></div>
       <span id="sync-label">Sync…</span>
     </div>
   </div>
   <div class="stats">
-    <div class="stat"><div class="stat-val" id="s-ss" style="color:#3de09a">0 €</div><div class="stat-lbl">Remb. SS</div></div>
-    <div class="stat"><div class="stat-val" id="s-mut" style="color:#b47de0">0 €</div><div class="stat-lbl">Mutuelle</div></div>
-    <div class="stat"><div class="stat-val" id="s-reste" style="color:#e07a5f">0 €</div><div class="stat-lbl">Reste</div></div>
-    <div class="stat"><div class="stat-val" id="s-attente" style="color:#e8b44a">0</div><div class="stat-lbl">En attente</div></div>
+    <div class="stat">
+      <div class="stat-val" id="s-total" style="color:var(--navy)">0 €</div>
+      <div class="stat-lbl">Total payé</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="s-cv" style="color:var(--green-mid)">0</div>
+      <div class="stat-lbl">Carte vitale ✓</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="s-mut" style="color:var(--orange)">0</div>
+      <div class="stat-lbl">Mutuelle en attente</div>
+    </div>
   </div>
 </div>
 
 <!-- TABS -->
 <div class="tabs">
-  <button class="tab" id="tab-list" onclick="showTab('list')">📋 Dépenses</button>
   <button class="tab active" id="tab-add" onclick="showTab('add')">＋ Ajouter</button>
+  <button class="tab" id="tab-list" onclick="showTab('list')">📋 Dépenses</button>
 </div>
 
-<!-- SCROLL AREA -->
+<!-- SCROLL -->
 <div class="scroll-area" id="scroll-area">
 
-  <!-- ADD TAB -->
+  <!-- ADD -->
   <div id="view-add">
     <div class="form-section">
+
       <div class="row2">
         <div class="field">
           <label>Date</label>
@@ -267,61 +373,81 @@ body {
         <div class="field">
           <label>Membre</label>
           <select id="f-membre">
-            <option value="moi">👨 Moi</option>
-            <option value="femme">👩 Femme ❤️</option>
-            <option value="fils">👦 Fils</option>
+            <option value="gabriel">👨 Gabriel</option>
+            <option value="lisa">👩 Lisa</option>
+            <option value="levi">👦 Lévi</option>
           </select>
         </div>
       </div>
+
       <div class="field">
         <label>Type de soin</label>
         <select id="f-type">
           <option>Médecin généraliste</option>
-          <option>Spécialiste</option>
-          <option>Dentiste</option>
-          <option>Kinésithérapeute</option>
-          <option>Opticien</option>
+          <option>Pédiatre</option>
+          <option>Gynécologue</option>
+          <option>Sage-femme</option>
           <option>Pharmacie</option>
-          <option>Laboratoire</option>
-          <option>Hôpital</option>
-          <option>Psychologue</option>
+          <option>Analyse médicale</option>
           <option>Autre</option>
         </select>
       </div>
-      <div class="row2">
-        <div class="field">
-          <label>Montant payé (€)</label>
-          <input type="number" id="f-paye" placeholder="25.00" step="0.01" min="0" inputmode="decimal">
-        </div>
-        <div class="field">
-          <label>Remb. SS (€)</label>
-          <input type="number" id="f-ss" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
-        </div>
-      </div>
+
       <div class="field">
-        <label>Remb. Mutuelle UNIM (€)</label>
-        <input type="number" id="f-mut" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
+        <label>Montant payé (€)</label>
+        <input type="number" id="f-paye" placeholder="25.00" step="0.01" min="0" inputmode="decimal">
       </div>
+
+      <!-- CARTE VITALE -->
+      <div class="radio-group">
+        <span class="radio-group-label">💳 Carte vitale passée ?</span>
+        <div class="radio-options">
+          <label class="radio-opt" id="cv-oui-lbl" onclick="selectRadio('cv','oui')">
+            <input type="radio" name="cv" value="oui" id="cv-oui">
+            ✓ Oui
+          </label>
+          <label class="radio-opt" id="cv-non-lbl" onclick="selectRadio('cv','non')">
+            <input type="radio" name="cv" value="non" id="cv-non">
+            ✗ Non
+          </label>
+        </div>
+      </div>
+
+      <!-- MUTUELLE -->
+      <div class="radio-group">
+        <span class="radio-group-label">📄 Facture envoyée à la mutuelle ?</span>
+        <div class="radio-options">
+          <label class="radio-opt" id="mut-oui-lbl" onclick="selectRadio('mut','oui')">
+            <input type="radio" name="mut" value="oui" id="mut-oui">
+            ✓ Oui
+          </label>
+          <label class="radio-opt" id="mut-non-lbl" onclick="selectRadio('mut','non')">
+            <input type="radio" name="mut" value="non" id="mut-non">
+            ✗ Non
+          </label>
+        </div>
+      </div>
+
       <div class="field">
         <label>Note (optionnel)</label>
         <input type="text" id="f-note" placeholder="Dr Martin, renouvellement ordonnance…">
       </div>
+
       <button class="btn-submit" id="btn-add" onclick="addEntry()">Ajouter la dépense</button>
     </div>
   </div>
 
-  <!-- LIST TAB -->
+  <!-- LIST -->
   <div id="view-list" style="display:none">
     <div class="filter-bar" id="filter-bar">
-      <button class="flt on" onclick="setFilter('status','tous',this)">Tous</button>
-      <button class="flt" onclick="setFilter('status','attente',this)">⏳ En attente</button>
-      <button class="flt" onclick="setFilter('status','ss_ok',this)">✅ SS ok</button>
-      <button class="flt" onclick="setFilter('status','tout_ok',this)">🎉 Tout remboursé</button>
+      <button class="flt on" onclick="setStatusFilter('tous',this)">Tous</button>
+      <button class="flt" onclick="setStatusFilter('cv_non',this)">💳 CV manquante</button>
+      <button class="flt" onclick="setStatusFilter('mut_non',this)">📄 Mutuelle en attente</button>
       <div class="flt-sep"></div>
-      <button class="flt on" onclick="setMemberFilter('tous',this)" id="fm-tous">👨‍👩‍👦</button>
-      <button class="flt" onclick="setMemberFilter('moi',this)">👨 Moi</button>
-      <button class="flt" onclick="setMemberFilter('femme',this)">👩 Femme</button>
-      <button class="flt" onclick="setMemberFilter('fils',this)">👦 Fils</button>
+      <button class="flt on" onclick="setMemberFilter('tous',this)">👨‍👩‍👦 Tous</button>
+      <button class="flt" onclick="setMemberFilter('gabriel',this)">Gabriel</button>
+      <button class="flt" onclick="setMemberFilter('lisa',this)">Lisa</button>
+      <button class="flt" onclick="setMemberFilter('levi',this)">Lévi</button>
     </div>
     <div class="entries" id="entries-list"></div>
     <div class="empty" id="empty-state" style="display:none">
@@ -329,9 +455,8 @@ body {
       <p>Aucune dépense ici.<br>Ajoutez-en une via l'onglet ＋</p>
     </div>
     <div class="footer-note" id="footer-note" style="display:none">
-      <span>☁️ Données synchronisées via Google Sheets</span>
-      <span>👨‍👩‍👦 Partagé entre tous vos appareils · Rafraîchissement auto 20s</span>
-      <span style="font-style:italic;margin-top:2px">Appuyez sur le statut pour le faire avancer</span>
+      ☁️ Synchronisé via Google Sheets · Partagé Famille Z<br>
+      Appuyez sur les badges pour mettre à jour le statut
     </div>
   </div>
 
@@ -343,34 +468,24 @@ const API = "https://script.google.com/macros/s/AKfycbyzoouxW5_2WvItXx--e7S1-FjM
 let entries = [];
 let filterStatus = "tous";
 let filterMember = "tous";
-let currentTab = "add";
+let radioState = { cv: null, mut: null };
 
-const STATUS = {
-  attente: { next: "ss_ok",   label: "⏳ En attente",    cls: "s-attente" },
-  ss_ok:   { next: "tout_ok", label: "✅ SS remboursée", cls: "s-ss_ok" },
-  tout_ok: { next: "attente", label: "🎉 Tout remboursé",cls: "s-tout_ok" },
-};
-
-// ── INIT ──
+// Init
 document.getElementById("f-date").value = today();
 
 async function init() {
   setSyncState("loading");
   await load();
-  setSyncState("ok");
-  setInterval(async () => {
-    await load();
-    setSyncState("ok");
-  }, 20000);
+  setInterval(async () => { await load(); }, 20000);
 }
 
-// ── CLOUD ──
 async function load() {
   try {
     const r = await fetch(API + "?action=load");
     const data = await r.json();
     entries = Array.isArray(data) ? data.filter(e => e && e.id) : [];
     render();
+    setSyncState("ok");
     setLastSync();
   } catch(e) {
     setSyncState("error");
@@ -388,16 +503,26 @@ async function cloudSave() {
     setLastSync();
   } catch(e) {
     setSyncState("error");
-    toast("Erreur de sync", "err");
+    toast("Erreur de synchronisation", "err");
   }
 }
 
-// ── FORM ──
+// ── RADIO ──
+function selectRadio(group, val) {
+  radioState[group] = val;
+  const oui = document.getElementById(`${group}-oui-lbl`);
+  const non = document.getElementById(`${group}-non-lbl`);
+  oui.className = "radio-opt" + (val === "oui" ? " selected-oui" : "");
+  non.className = "radio-opt" + (val === "non" ? " selected-non" : "");
+}
+
+// ── ADD ──
 async function addEntry() {
   const paye = parseFloat(document.getElementById("f-paye").value);
   if (!paye || paye <= 0) { toast("Entrez un montant valide", "err"); return; }
-  const ss  = parseFloat(document.getElementById("f-ss").value)  || 0;
-  const mut = parseFloat(document.getElementById("f-mut").value) || 0;
+  if (!radioState.cv)  { toast("Indiquez si la carte vitale a été passée", "err"); return; }
+  if (!radioState.mut) { toast("Indiquez si la facture a été envoyée à la mutuelle", "err"); return; }
+
   const btn = document.getElementById("btn-add");
   btn.disabled = true; btn.textContent = "Ajout en cours…";
 
@@ -406,55 +531,62 @@ async function addEntry() {
     date: document.getElementById("f-date").value,
     membre: document.getElementById("f-membre").value,
     type: document.getElementById("f-type").value,
-    paye, ss, mutuelle: mut,
+    paye,
+    carteVitale: radioState.cv,
+    mutuelle: radioState.mut,
     note: document.getElementById("f-note").value.trim(),
-    status: ss > 0 && mut > 0 ? "tout_ok" : ss > 0 ? "ss_ok" : "attente",
     createdAt: new Date().toISOString(),
   };
 
   entries.unshift(entry);
   await cloudSave();
 
+  // Reset form
   document.getElementById("f-paye").value = "";
-  document.getElementById("f-ss").value = "";
-  document.getElementById("f-mut").value = "";
   document.getElementById("f-note").value = "";
   document.getElementById("f-date").value = today();
+  radioState = { cv: null, mut: null };
+  ["cv","mut"].forEach(g => {
+    document.getElementById(`${g}-oui-lbl`).className = "radio-opt";
+    document.getElementById(`${g}-non-lbl`).className = "radio-opt";
+  });
 
   btn.disabled = false; btn.textContent = "Ajouter la dépense";
   toast("✓ Dépense ajoutée !");
   showTab("list");
 }
 
-async function toggleStatus(id) {
+// ── TOGGLE BADGES ──
+async function toggleCV(id) {
   const e = entries.find(x => x.id == id);
   if (!e) return;
-  e.status = STATUS[e.status]?.next || "attente";
-  render();
-  await cloudSave();
+  e.carteVitale = e.carteVitale === "oui" ? "non" : "oui";
+  render(); await cloudSave();
+}
+async function toggleMut(id) {
+  const e = entries.find(x => x.id == id);
+  if (!e) return;
+  e.mutuelle = e.mutuelle === "oui" ? "non" : "oui";
+  render(); await cloudSave();
 }
 
 async function deleteEntry(id) {
   if (!confirm("Supprimer cette dépense ?")) return;
   entries = entries.filter(x => x.id != id);
-  render();
-  await cloudSave();
+  render(); await cloudSave();
   toast("Dépense supprimée", "warn");
 }
 
 // ── FILTERS ──
-let activeStatusBtn = null;
-let activeMemberBtn = null;
-
-function setFilter(type, val, btn) {
+function setStatusFilter(val, btn) {
   filterStatus = val;
-  document.querySelectorAll("#filter-bar .flt:not([onclick*='setMemberFilter'])").forEach(b => b.classList.remove("on"));
+  document.querySelectorAll("#filter-bar .flt:not([onclick*='MemberFilter'])").forEach(b => b.classList.remove("on"));
   btn.classList.add("on");
   render();
 }
 function setMemberFilter(val, btn) {
   filterMember = val;
-  document.querySelectorAll("#filter-bar .flt[onclick*='setMemberFilter']").forEach(b => b.classList.remove("on"));
+  document.querySelectorAll("#filter-bar .flt[onclick*='MemberFilter']").forEach(b => b.classList.remove("on"));
   btn.classList.add("on");
   render();
 }
@@ -462,18 +594,18 @@ function setMemberFilter(val, btn) {
 // ── RENDER ──
 function render() {
   // Stats
-  const totalSS    = entries.reduce((a,e) => a+(parseFloat(e.ss)||0), 0);
-  const totalMut   = entries.reduce((a,e) => a+(parseFloat(e.mutuelle)||0), 0);
-  const totalReste = entries.reduce((a,e) => a+Math.max(0,(parseFloat(e.paye)||0)-(parseFloat(e.ss)||0)-(parseFloat(e.mutuelle)||0)), 0);
-  const nbAttente  = entries.filter(e => e.status === "attente").length;
-  document.getElementById("s-ss").textContent     = fmt(totalSS);
-  document.getElementById("s-mut").textContent    = fmt(totalMut);
-  document.getElementById("s-reste").textContent  = fmt(totalReste);
-  document.getElementById("s-attente").textContent = nbAttente;
+  const totalPaye = entries.reduce((a,e) => a+(parseFloat(e.paye)||0), 0);
+  const cvOk      = entries.filter(e => e.carteVitale === "oui").length;
+  const mutAttente = entries.filter(e => e.mutuelle === "non").length;
+  document.getElementById("s-total").textContent = fmt(totalPaye);
+  document.getElementById("s-cv").textContent    = cvOk;
+  document.getElementById("s-mut").textContent   = mutAttente;
 
+  // Filter
   const filtered = entries.filter(e => {
-    if (filterStatus !== "tous" && e.status !== filterStatus) return false;
-    if (filterMember !== "tous" && e.membre !== filterMember) return false;
+    if (filterStatus === "cv_non"  && e.carteVitale !== "non") return false;
+    if (filterStatus === "mut_non" && e.mutuelle !== "non")    return false;
+    if (filterMember !== "tous" && e.membre !== filterMember)  return false;
     return true;
   });
 
@@ -482,45 +614,41 @@ function render() {
   const foot  = document.getElementById("footer-note");
 
   if (filtered.length === 0) {
-    list.innerHTML = ""; empty.style.display = ""; foot.style.display = "none";
-  } else {
-    empty.style.display = "none"; foot.style.display = "";
-    list.innerHTML = filtered.map(e => {
-      const paye = parseFloat(e.paye)||0;
-      const ss   = parseFloat(e.ss)||0;
-      const mut  = parseFloat(e.mutuelle)||0;
-      const reste = Math.max(0, paye - ss - mut);
-      const st = STATUS[e.status] || STATUS["attente"];
-      const avClass = e.membre === "moi" ? "av-moi" : e.membre === "femme" ? "av-femme" : "av-fils";
-      const emoji = e.membre === "moi" ? "👨" : e.membre === "femme" ? "👩" : "👦";
-      return `
-        <div class="entry">
-          <div class="avatar ${avClass}">${emoji}</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-type">${e.type}</span>
-              <span class="entry-date">${fmtDate(e.date)}</span>
-            </div>
-            ${e.note ? `<div class="entry-note">${e.note}</div>` : ""}
-            <div class="pills" style="margin-top:5px">
-              <span class="pill" style="background:var(--blue-bg);color:var(--blue)"><span class="pill-dot" style="background:var(--blue)"></span>Payé ${fmt(paye)}</span>
-              ${ss > 0 ? `<span class="pill" style="background:var(--green-bg);color:var(--green)"><span class="pill-dot" style="background:var(--green)"></span>SS ${fmt(ss)}</span>` : ""}
-              ${mut > 0 ? `<span class="pill" style="background:var(--purple-bg);color:var(--purple)"><span class="pill-dot" style="background:var(--purple)"></span>Mut. ${fmt(mut)}</span>` : ""}
-              ${reste > 0 ? `<span class="pill" style="background:var(--red-bg);color:var(--red)"><span class="pill-dot" style="background:var(--red)"></span>Reste ${fmt(reste)}</span>` : ""}
-            </div>
-          </div>
-          <div class="entry-right">
-            <button class="status-btn ${st.cls}" onclick="toggleStatus(${e.id})">${st.label}</button>
-            <button class="btn-del" onclick="deleteEntry(${e.id})">✕</button>
-          </div>
-        </div>`;
-    }).join("");
+    list.innerHTML = ""; empty.style.display = ""; foot.style.display = "none"; return;
   }
+  empty.style.display = "none"; foot.style.display = "";
+
+  list.innerHTML = filtered.map(e => {
+    const avClass = e.membre === "gabriel" ? "av-gabriel" : e.membre === "lisa" ? "av-lisa" : "av-levi";
+    const initials = e.membre === "gabriel" ? "GA" : e.membre === "lisa" ? "LI" : "LÉ";
+    const cvClass  = e.carteVitale === "oui" ? "cv-oui"  : "cv-non";
+    const mutClass = e.mutuelle    === "oui" ? "mut-oui" : "mut-non";
+    const cvLabel  = e.carteVitale === "oui" ? "💳 CV passée" : "💳 CV manquante";
+    const mutLabel = e.mutuelle    === "oui" ? "📄 Mutuelle envoyée" : "📄 Mutuelle en attente";
+    return `
+      <div class="entry">
+        <div class="entry-top">
+          <div class="avatar ${avClass}">${initials}</div>
+          <div class="entry-main">
+            <div class="entry-type">${e.type}</div>
+            <div class="entry-meta">
+              <span class="entry-date">${fmtDate(e.date)}</span>
+              ${e.note ? `<span class="entry-note">${e.note}</span>` : ""}
+            </div>
+          </div>
+          <div class="entry-amount">${fmt(e.paye)}</div>
+        </div>
+        <div class="entry-footer">
+          <button class="badge ${cvClass}" onclick="toggleCV(${e.id})">${cvLabel}</button>
+          <button class="badge ${mutClass}" onclick="toggleMut(${e.id})">${mutLabel}</button>
+          <button class="btn-del" onclick="deleteEntry(${e.id})">✕</button>
+        </div>
+      </div>`;
+  }).join("");
 }
 
 // ── TABS ──
 function showTab(tab) {
-  currentTab = tab;
   document.getElementById("view-add").style.display  = tab === "add"  ? "" : "none";
   document.getElementById("view-list").style.display = tab === "list" ? "" : "none";
   document.getElementById("tab-add").classList.toggle("active",  tab === "add");
@@ -539,17 +667,13 @@ function fmtDate(d) {
   const [y,m,j] = String(d).split("-");
   return `${j}/${m}/${y}`;
 }
-
-let toastTimer = null;
+let toastTimer;
 function toast(msg, type = "ok") {
   const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.className = `toast toast-${type}`;
-  el.style.display = "";
-  clearTimeout(toastTimer);
+  el.textContent = msg; el.className = `toast toast-${type}`;
+  el.style.display = ""; clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { el.style.display = "none"; }, 2800);
 }
-
 function setSyncState(state) {
   const dot = document.getElementById("sync-dot");
   const lbl = document.getElementById("sync-label");
@@ -558,9 +682,8 @@ function setSyncState(state) {
   else if (state === "error") lbl.textContent = "Hors ligne";
 }
 function setLastSync() {
-  const now = new Date();
   document.getElementById("sync-label").textContent =
-    now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+    new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 }
 
 init();
